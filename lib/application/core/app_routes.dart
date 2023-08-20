@@ -4,18 +4,23 @@ import 'package:bloc_todo_app/application/screen/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../screen/dashboard/dashboard_screen.dart';
+
 final GlobalKey<NavigatorState> navigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> shellKey =
     GlobalKey<NavigatorState>(debugLabel: 'shell');
 
+const String _basePath = '/home';
+
 final routes = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: '/home/dashboard',
+  initialLocation: '$_basePath/${DashboardScreen.screenConfig.name}',
   observers: [GoRouterObserver()],
   routes: [
     GoRoute(
-      path: '/home/settings',
+      name: SettingsScreen.screenConfig.name,
+      path: '$_basePath/${SettingsScreen.screenConfig.name}',
       builder: (context, state) {
         return const SettingsScreen();
       },
@@ -25,7 +30,8 @@ final routes = GoRouter(
       builder: (context, state, child) => child,
       routes: [
         GoRoute(
-          path: '/home/:tab',
+          name: HomeScreen.screenConfig.name,
+          path: '$_basePath/:tab',
           builder: (context, state) => HomeScreen(
             key: state.pageKey,
             tab: state.pathParameters['tab']!,

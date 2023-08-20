@@ -1,3 +1,4 @@
+import 'package:bloc_todo_app/application/core/screen_config.dart';
 import 'package:bloc_todo_app/application/screen/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
@@ -9,6 +10,8 @@ class HomeScreen extends StatefulWidget {
   HomeScreen({super.key, required String tab})
       : index = tabs.indexWhere((element) => element.name == tab);
 
+  static const ScreenConfig screenConfig =
+      ScreenConfig(icon: Icons.home_rounded, name: 'home');
   final int index;
 
   static const tabs = [
@@ -38,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 key: const Key('primary-navigation-medium'),
                 builder: (context) => AdaptiveScaffold.standardNavigationRail(
                   selectedLabelTextStyle:
-                      TextStyle(color: theme.colorScheme.onBackground),
+                      TextStyle(color: theme.colorScheme.onBackground), 
                   selectedIconTheme:
                       IconThemeData(color: theme.colorScheme.onBackground),
                   unselectedIconTheme: IconThemeData(
@@ -88,5 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _tapOnNavigationDestination(BuildContext context, int index) =>
-      context.go('/home/${HomeScreen.tabs[index].name}');
+      context.goNamed(
+        HomeScreen.screenConfig.name,
+        pathParameters: {'tab': HomeScreen.tabs[index].name},
+      );
 }
