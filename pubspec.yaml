@@ -14,6 +14,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   go_router: ^10.0.0
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_lints: ^2.0.1
