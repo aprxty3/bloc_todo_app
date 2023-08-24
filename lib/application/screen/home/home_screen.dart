@@ -1,5 +1,6 @@
 import 'package:bloc_todo_app/application/core/screen_config.dart';
 import 'package:bloc_todo_app/application/screen/dashboard/dashboard_screen.dart';
+import 'package:bloc_todo_app/application/screen/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
@@ -40,8 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
               Breakpoints.mediumAndUp: SlotLayout.from(
                 key: const Key('primary-navigation-medium'),
                 builder: (context) => AdaptiveScaffold.standardNavigationRail(
+                  trailing: IconButton(
+                      onPressed: () =>
+                          context.pushNamed(SettingsScreen.screenConfig.name),
+                      icon: Icon(SettingsScreen.screenConfig.icon)),
                   selectedLabelTextStyle:
-                      TextStyle(color: theme.colorScheme.onBackground), 
+                      TextStyle(color: theme.colorScheme.onBackground),
                   selectedIconTheme:
                       IconThemeData(color: theme.colorScheme.onBackground),
                   unselectedIconTheme: IconThemeData(
@@ -61,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Breakpoints.small: SlotLayout.from(
                 key: const Key('bottom-navigation-small'),
                 builder: (_) => AdaptiveScaffold.standardBottomNavigationBar(
+                  
                   destinations: destinations,
                   currentIndex: widget.index,
                   onDestinationSelected: (index) =>
