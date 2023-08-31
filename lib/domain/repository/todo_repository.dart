@@ -7,5 +7,9 @@ import 'package:either_dart/either.dart';
 abstract class ToDoRepository {
   Future<Either<Failure, List<TodoCollections>>> readTodoCollections();
 
-  Future<Either<Failure, TodoEntry>> readTodoEntry(CollectionId collectionId, EntryId entryId);
+  Future<Either<Failure, TodoEntry>> readTodoEntry(
+      CollectionId collectionId, EntryId entryId);
+
+  Future<Either<Failure, List<EntryId>>> readEntryById(
+      CollectionId collectionId);
 }
